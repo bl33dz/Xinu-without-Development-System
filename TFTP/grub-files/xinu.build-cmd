@@ -1,0 +1,3 @@
+./grub-mkimage -O i386-pc-pxe -o xinu.grub -d ./grub-core -c xinu.cfg	\
+	--prefix='(pxe)' tftp multiboot multiboot2 boot ls pxe pxechain
+chmod 755 xinu.grub
