@@ -14,7 +14,7 @@ PNAME		=	Vbox
 PLAT		=	Platform_$(PNAME)
 TOPDIR		=	..
 
-CC		=	${COMPILER_ROOT}gcc-4.8
+CC		=	${COMPILER_ROOT}gcc
 LD		=	${COMPILER_ROOT}ld
 OBJCOPY		=	${COMPILER_ROOT}objcopy
 XINU		=	$(TOPDIR)/compile/xinu.elf
@@ -22,6 +22,7 @@ XINUBIN		=	$(TOPDIR)/compile/xinu.bin
 XINUXBIN	=	$(TOPDIR)/compile/xinu
 MAKEXBIN 	=	$(TOPDIR)/compile/bin/buildxbin
 BUILDMAKE	=	$(TOPDIR)/compile/bin/build-make
+VBOXTFTP	=	$(HOME)/.config/VirtualBox/TFTP
 
 MAKEDEP		=	$(CC) -M -MG
 
@@ -111,8 +112,8 @@ ECHO$(MACHINE) = echo; echo "On Vbox, the following command would be run:  "
 xinu:	Makefile rebuild $(BLDDIRS) $(DEFSFILE) $(DEPSFILE) $(CONFH) $(CONFC) $(LD_LIST)
 	@echo;echo 'Loading object files to produce GRUB bootable xinu'
 	@$(LD) $(LDFLAGS) $(LD_LIST) -o $(XINU)
-	@echo Copying xinu.elf to xinu.boot in the TFTP directory.
-	@$(ECHOxinu00) cp xinu.elf /srv/tftp/xinu.boot
+	@echo Copying xinu.elf to xinu.boot in the VirtualBox TFTP directory.
+	@$(ECHOxinu00) cp xinu.elf $(VBOXTFTP)/xinu.boot
 	@echo
 	
 
